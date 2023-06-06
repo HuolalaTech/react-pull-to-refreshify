@@ -18,7 +18,7 @@ function renderText(pullStatus, percent) {
       );
 
     case PULL_STATUS.canRelease:
-      return `Release`;
+      return "Release";
 
     case PULL_STATUS.refreshing:
       return "Loading...";

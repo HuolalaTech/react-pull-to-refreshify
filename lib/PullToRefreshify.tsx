@@ -26,13 +26,21 @@ export function PullToRefreshify({
 }: PullToRefreshifyProps) {
   const { ref: pullRef, scrollParent } = useScrollParent();
   const unmountedRef = useUnmountedRef();
-  const [{ offsetY, duration, pullStatus }, setState] = useState({
-    offsetY: 0,
-    duration: 0,
-    pullStatus: PULL_STATUS.normal,
-  });
+  const [{ offsetY, duration, pullStatus }, setState] = useState(
+    refreshing
+      ? {
+          duration: animationDuration,
+          offsetY: headHeight,
+          pullStatus: PULL_STATUS.refreshing,
+        }
+      : {
+          offsetY: 0,
+          duration: 0,
+          pullStatus: PULL_STATUS.normal,
+        }
+  );
 
-  const updatePullStatus = (status: PULL_STATUS, dragOffsetY = 0) => {
+  const dispatch = (status: PULL_STATUS, dragOffsetY = 0) => {
     switch (status) {
       case PULL_STATUS.pulling:
       case PULL_STATUS.canRelease:
@@ -59,7 +67,7 @@ export function PullToRefreshify({
         });
         if (unmountedRef.current) return;
         setTimeout(() => {
-          updatePullStatus(PULL_STATUS.normal);
+          dispatch(PULL_STATUS.normal);
         }, completeDelay);
         break;
 
@@ -74,9 +82,7 @@ export function PullToRefreshify({
 
   // Skip the first render
   useUpdateEffect(() => {
-    updatePullStatus(
-      refreshing ? PULL_STATUS.refreshing : PULL_STATUS.complete
-    );
+    dispatch(refreshing ? PULL_STATUS.refreshing : PULL_STATUS.complete);
   }, [refreshing]);
 
   // Handle darg events
@@ -110,7 +116,7 @@ export function PullToRefreshify({
           ? PULL_STATUS.pulling
           : PULL_STATUS.canRelease;
 
-      updatePullStatus(action, offset);
+      dispatch(action, offset);
       return true;
     },
     onDragEnd: (_, { offsetY: dragOffsetY }) => {
@@ -121,7 +127,7 @@ export function PullToRefreshify({
 
       // When the current state is the pulling state
       if (pullStatus === PULL_STATUS.pulling) {
-        updatePullStatus(PULL_STATUS.normal);
+        dispatch(PULL_STATUS.normal);
         return;
       }
 
@@ -132,13 +138,12 @@ export function PullToRefreshify({
     },
   });
 
-  const translateY = pullStatus < PULL_STATUS.canRelease ? headHeight : offsetY;
   const transformStyle: CSSProperties = {
     willChange: "transform",
     WebkitTransition: `all ${duration}ms`,
     transition: `all ${duration}ms`,
-    WebkitTransform: `translate3d(0, ${translateY}px, 0)`,
-    transform: `translate3d(0, ${translateY}px, 0)`,
+    WebkitTransform: `translate3d(0, ${offsetY}px, 0)`,
+    transform: `translate3d(0, ${offsetY}px, 0)`,
   };
 
   let percent = 0;
