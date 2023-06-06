@@ -1,6 +1,8 @@
 # react-pull-to-refreshify
 
-一个简单的下拉刷新组件，对 React 组件 0 依赖，灵感来自 Ant Design Mobile 的 api 设计，但可定制化程度更高，压缩后只有 2kb，适用于手机端和电脑端。
+一个简单的下拉刷新组件，具有 0 依赖性。灵感来自 Ant Design Mobile 的 api 设计，但可定制化程度更高，压缩后只有 2kb，适用于手机端和电脑端。
+
+![自定义百分比动画](https://files.catbox.moe/j0h1xg.gif)
 
 [English](./README.md) | 简体中文
 
@@ -54,6 +56,7 @@ function handleRefresh() {
 ## 例子
 
 - [基础](https://codesandbox.io/s/shy-glade-gu7wfu)
+- [最大高度](https://codesandbox.io/s/eager-mcnulty-i53syu)
 - [加载更多](https://codesandbox.io/s/mystifying-banach-07mccb)
 - [百分比动画](https://codesandbox.io/s/frosty-herschel-dxrn4e?file=/src/App.tsx)
 

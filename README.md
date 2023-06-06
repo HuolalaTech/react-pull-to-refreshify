@@ -1,6 +1,8 @@
 # react-pull-to-refreshify
 
-A simple pull-to-refresh component with 0 dependencies on React components, inspired by the api design of Ant Design Mobile, but more customizable, only 2kb after compression, suitable for mobile and computer terminals.
+A simple pull-to-refresh component for React components with 0 dependencies, inspired by the api design of Ant Design Mobile, but more customizable, only 2kb after compression, suitable for mobile and computer terminals.
+
+![自定义百分比动画](https://files.catbox.moe/n1vr31.gif)
 
 English | [简体中文](./README-zh_CN.md)
 
@@ -54,6 +56,7 @@ function handleRefresh() {
 ## Examples
 
 - [Basic](https://codesandbox.io/s/shy-glade-gu7wfu)
+- [Max Height](https://codesandbox.io/s/eager-mcnulty-i53syu)
 - [Load more](https://codesandbox.io/s/mystifying-banach-07mccb)
 - [Percentage animation](https://codesandbox.io/s/frosty-herschel-dxrn4e?file=/src/App.tsx)
 
