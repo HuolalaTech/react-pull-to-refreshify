@@ -9,8 +9,6 @@ import { getScrollTop } from "./utils/getScrollTop";
 import { isSupportsPassive } from "./utils/event";
 import { PULL_STATUS, PullToRefreshifyProps } from "./types";
 
-const prefixCls = "pull-to-refreshify";
-
 export function PullToRefreshify({
   className,
   style,
@@ -22,6 +20,7 @@ export function PullToRefreshify({
   threshold = headHeight,
   onRefresh,
   disabled = false,
+  prefixCls = "pull-to-refreshify",
   renderText,
   children,
 }: PullToRefreshifyProps) {
@@ -169,7 +168,7 @@ export function PullToRefreshify({
         ref={pullRef}
       >
         <div
-          key={offsetY}
+          key={offsetY.toFixed(0)}
           className={`${prefixCls}__refresh`}
           style={{
             display: "flex",

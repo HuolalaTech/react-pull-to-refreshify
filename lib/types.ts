@@ -45,5 +45,9 @@ export interface PullToRefreshifyProps {
    * Customize the pulling content according to the pulling status
    */
   renderText: (status: PULL_STATUS, percent: number) => React.ReactNode;
+  /**
+   * prefix class
+   */
+  prefixCls?: string;
   children?: ReactNode;
 }

@@ -1,6 +1,6 @@
 # react-pull-to-refreshify
 
-一个简单的 0 依赖 React 组件的下拉刷新组件，灵感来自 Ant Design Mobile 的 api 设计，但具有更多的 api，压缩后仅有 2kb，适用于手机和电脑。
+一个简单的下拉刷新组件，对 React 组件 0 依赖，灵感来自 Ant Design Mobile 的 api 设计，但可定制化程度更高，压缩后只有 2kb，适用于手机端和电脑端。
 
 [English](./README.md) | 简体中文
 
@@ -79,6 +79,7 @@ enum PULL_STATUS {
 |    headHeight     |                          number                           |  false   |         50         | 顶部内容高度                     |
 |     threshold     |                          number                           |  false   | 与 headHeight 一致 | 触发下拉刷新的距离               |
 |   startDistance   |                          number                           |  false   |         30         | 助跑距离                         |
+|     prefixCls     |                          string                           |  false   | pull-to-refreshify | 前缀类名                         |
 |     disabled      |                          boolean                          |  false   |       false        | 是否禁用下拉刷新                 |
 |     className     |                          string                           |  false   |                    |                                  |
 |       style       |                       CSSProperties                       |  false   |                    |                                  |

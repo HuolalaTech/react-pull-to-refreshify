@@ -1,6 +1,6 @@
 # react-pull-to-refreshify
 
-A simple pull-to-refresh component with zero dependencies on React components, inspired by Ant Design Mobile's api design, but with more apis, only 2kb after compression, suitable for mobile phones and computers.
+A simple pull-to-refresh component with 0 dependencies on React components, inspired by the api design of Ant Design Mobile, but more customizable, only 2kb after compression, suitable for mobile and computer terminals.
 
 English | [简体中文](./README-zh_CN.md)
 
@@ -79,6 +79,7 @@ enum PULL_STATUS {
 |    headHeight     |                          number                           |  false   |             50             | The height of the head prompt content area, the unit is px           |
 |     threshold     |                          number                           |  false   | Consistent with headHeight | How far to pull down to trigger refresh, unit is px                  |
 |   startDistance   |                          number                           |  false   |             30             | How far to start the pulling status, unit is px                      |
+|     prefixCls     |                          string                           |  false   |     pull-to-refreshify     | prefix class                                                         |
 |     disabled      |                          boolean                          |  false   |           false            | Whether the PullToRefresh is disabled                                |
 |     className     |                          string                           |  false   |                            |                                                                      |
 |       style       |                       CSSProperties                       |  false   |                            |                                                                      |
