@@ -1,5 +1,5 @@
 import { MouseEvent, useEffect, useRef } from "react";
-import { disableEventPassiveOptions } from "./event";
+import { Events } from "./events";
 import { useLatest } from "./useLatest";
 
 export interface DragState {
@@ -52,7 +52,7 @@ export function useDrag({
       };
     };
 
-    const handleTouchstart = (event: DragEvent) => {
+    const handleTouchstart = ((event: DragEvent) => {
       isStart = true;
       initDragState();
       if (isMouseEvent(event)) {
@@ -66,9 +66,9 @@ export function useDrag({
         dragState.startY = touch.pageY;
       }
       onDragStartRef.current?.(event, dragState);
-    };
+    }) as EventListener;
 
-    const handleTouchmove = (event: DragEvent) => {
+    const handleTouchmove = ((event: DragEvent) => {
       if (!isStart) return;
 
       let currentX = 0;
@@ -95,59 +95,30 @@ export function useDrag({
       if (onDragMoveRef.current?.(event, state)) {
         dragState = state;
       }
-    };
+    }) as EventListener;
 
-    const handleTouchend = (event: DragEvent) => {
+    const handleTouchend = ((event: DragEvent) => {
       isStart = false;
       onDragEndRef.current?.(event, dragState);
       initDragState();
-    };
+    }) as EventListener;
 
-    // touch events
-    dragEl.addEventListener(
-      "touchstart",
-      handleTouchstart,
-      disableEventPassiveOptions()
-    );
-    dragEl.addEventListener(
-      "touchmove",
-      handleTouchmove,
-      disableEventPassiveOptions()
-    );
-    dragEl.addEventListener(
-      "touchend",
-      handleTouchend,
-      disableEventPassiveOptions()
-    );
-    dragEl.addEventListener(
-      "touchcancel",
-      handleTouchend,
-      disableEventPassiveOptions()
-    );
-    dragEl.addEventListener(
-      "mousedown",
-      handleTouchstart,
-      disableEventPassiveOptions()
-    );
-    dragEl.addEventListener(
-      "mousemove",
-      handleTouchmove,
-      disableEventPassiveOptions()
-    );
-    dragEl.addEventListener(
-      "mouseup",
-      handleTouchend,
-      disableEventPassiveOptions()
-    );
+    Events.on(dragEl, "touchstart", handleTouchstart);
+    Events.on(dragEl, "touchmove", handleTouchmove);
+    Events.on(dragEl, "touchend", handleTouchend);
+    Events.on(dragEl, "touchcancel", handleTouchend);
+    Events.on(dragEl, "mousedown", handleTouchstart);
+    Events.on(dragEl, "mousemove", handleTouchmove);
+    Events.on(dragEl, "mouseup", handleTouchend);
 
     return () => {
-      dragEl.removeEventListener("touchstart", handleTouchstart);
-      dragEl.removeEventListener("touchmove", handleTouchmove);
-      dragEl.removeEventListener("touchend", handleTouchend);
-      dragEl.removeEventListener("touchcancel", handleTouchend);
-      dragEl.removeEventListener("mousedown", handleTouchstart);
-      dragEl.removeEventListener("mousemove", handleTouchmove);
-      dragEl.removeEventListener("mouseup", handleTouchend);
+      Events.off(dragEl, "touchstart", handleTouchstart);
+      Events.off(dragEl, "touchmove", handleTouchmove);
+      Events.off(dragEl, "touchend", handleTouchend);
+      Events.off(dragEl, "touchcancel", handleTouchend);
+      Events.off(dragEl, "mousedown", handleTouchstart);
+      Events.off(dragEl, "mousemove", handleTouchmove);
+      Events.off(dragEl, "mouseup", handleTouchend);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

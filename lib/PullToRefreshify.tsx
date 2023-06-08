@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { useScrollParent } from "./utils/useScrollParent";
 
-import type { CSSProperties } from "react";
 import { useUnmountedRef } from "./utils/useUnmountedRef";
 import { useUpdateEffect } from "./utils/useUpdateEffect";
 import { useDrag } from "./utils/useDrag";
 import { getScrollTop } from "./utils/getScrollTop";
-import { isSupportsPassive } from "./utils/event";
 import { PULL_STATUS, PullToRefreshifyProps } from "./types";
+import { Events } from "./utils/events";
 
 export function PullToRefreshify({
   className,
@@ -103,7 +102,7 @@ export function PullToRefreshify({
       }
 
       // Solve the bug that the low-end Android system only triggers the touchmove event once
-      if (!isSupportsPassive()) {
+      if (!Events.isSupportsPassive()) {
         event.preventDefault();
       }
 
@@ -138,14 +137,6 @@ export function PullToRefreshify({
     },
   });
 
-  const transformStyle: CSSProperties = {
-    willChange: "transform",
-    WebkitTransition: `all ${duration}ms`,
-    transition: `all ${duration}ms`,
-    WebkitTransform: `translate3d(0, ${offsetY}px, 0)`,
-    transform: `translate3d(0, ${offsetY}px, 0)`,
-  };
-
   let percent = 0;
   if (offsetY >= startDistance) {
     percent =
@@ -168,9 +159,15 @@ export function PullToRefreshify({
       }}
     >
       <div
-        className={`${prefixCls}__content`}
-        style={transformStyle}
         ref={pullRef}
+        className={`${prefixCls}__content`}
+        style={{
+          willChange: "transform",
+          WebkitTransition: `all ${duration}ms`,
+          transition: `all ${duration}ms`,
+          WebkitTransform: `translate3d(0, ${offsetY}px, 0)`,
+          transform: `translate3d(0, ${offsetY}px, 0)`,
+        }}
       >
         <div
           key={offsetY.toFixed(0)}

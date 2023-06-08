@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { getScrollTop } from "./getScrollTop";
-import { disableEventPassiveOptions } from "./event";
+import { Events } from "./events";
 
 function getScrollParent(node: Element) {
   while (node && node.parentNode && node.parentNode !== document.body) {
@@ -55,32 +55,16 @@ export function useScrollParent() {
       touchstartY = 0;
     };
 
-    scrollParent.addEventListener(
-      "touchstart",
-      handleTouchstart,
-      disableEventPassiveOptions()
-    );
-    scrollParent.addEventListener(
-      "touchmove",
-      handleTouchmove,
-      disableEventPassiveOptions()
-    );
-    scrollParent.addEventListener(
-      "touchend",
-      handleTouchend,
-      disableEventPassiveOptions()
-    );
-    scrollParent.addEventListener(
-      "touchcancel",
-      handleTouchend,
-      disableEventPassiveOptions()
-    );
+    Events.on(scrollParent, "touchstart", handleTouchstart);
+    Events.on(scrollParent, "touchmove", handleTouchmove);
+    Events.on(scrollParent, "touchend", handleTouchend);
+    Events.on(scrollParent, "touchcancel", handleTouchend);
 
     return () => {
-      scrollParent.removeEventListener("touchstart", handleTouchstart);
-      scrollParent.removeEventListener("touchmove", handleTouchmove);
-      scrollParent.removeEventListener("touchend", handleTouchend);
-      scrollParent.removeEventListener("touchcancel", handleTouchend);
+      Events.off(scrollParent, "touchstart", handleTouchstart);
+      Events.off(scrollParent, "touchmove", handleTouchmove);
+      Events.off(scrollParent, "touchend", handleTouchend);
+      Events.off(scrollParent, "touchcancel", handleTouchend);
     };
   }, [scrollParent]);
 

@@ -1,6 +1,6 @@
 # react-pull-to-refreshify
 
-A simple pull-to-refresh component for React components with 0 dependencies, inspired by the api design of Ant Design Mobile, but more customizable, only 2kb after compression, suitable for mobile and computer terminals.
+A simple react pull-to-refresh component with 0 dependencies. Its API design is similar to Ant Design Mobile, but it is more customizable and only 2kb after compression, suitable for both Mobile and Desktop.
 
 ![自定义百分比动画](https://files.catbox.moe/n1vr31.gif)
 

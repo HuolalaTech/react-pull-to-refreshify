@@ -1,6 +1,6 @@
 # react-pull-to-refreshify
 
-一个简单的下拉刷新组件，具有 0 依赖性。灵感来自 Ant Design Mobile 的 api 设计，但可定制化程度更高，压缩后只有 2kb，适用于手机端和电脑端。
+一个简单的下拉刷新组件，具有 0 依赖性。它的 API 设计类似于 Ant Design Mobile，但可定制化程度更高，压缩后只有 2kb，适用于手机端和电脑端。
 
 ![自定义百分比动画](https://files.catbox.moe/j0h1xg.gif)
 
