@@ -58,7 +58,8 @@ function handleRefresh() {
 - [Basic](https://codesandbox.io/s/shy-glade-gu7wfu)
 - [Max Height](https://codesandbox.io/s/eager-mcnulty-i53syu)
 - [Load more](https://codesandbox.io/s/mystifying-banach-07mccb)
-- [Percentage animation](https://codesandbox.io/s/frosty-herschel-dxrn4e?file=/src/App.tsx)
+- [animation 1](https://codesandbox.io/s/frosty-herschel-dxrn4e)
+- [animation 2](https://codesandbox.io/s/confident-morning-9eug7v)
 
 ## Props
 

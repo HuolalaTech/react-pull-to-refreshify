@@ -58,7 +58,8 @@ function handleRefresh() {
 - [基础](https://codesandbox.io/s/shy-glade-gu7wfu)
 - [最大高度](https://codesandbox.io/s/eager-mcnulty-i53syu)
 - [加载更多](https://codesandbox.io/s/mystifying-banach-07mccb)
-- [百分比动画](https://codesandbox.io/s/frosty-herschel-dxrn4e?file=/src/App.tsx)
+- [动画 1](https://codesandbox.io/s/frosty-herschel-dxrn4e)
+- [动画 2](https://codesandbox.io/s/confident-morning-9eug7v)
 
 ## Props
 
