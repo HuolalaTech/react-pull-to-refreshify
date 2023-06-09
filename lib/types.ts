@@ -1,12 +1,11 @@
 import type { CSSProperties, ReactNode } from "react";
 
-export enum PULL_STATUS {
-  normal,
-  pulling,
-  canRelease,
-  refreshing,
-  complete,
-}
+export type PullStatus =
+  | "normal"
+  | "pulling"
+  | "canRelease"
+  | "refreshing"
+  | "complete";
 
 export interface PullToRefreshifyProps {
   className?: string;
@@ -44,7 +43,7 @@ export interface PullToRefreshifyProps {
   /**
    * Customize the pulling content according to the pulling status
    */
-  renderText: (status: PULL_STATUS, percent: number) => React.ReactNode;
+  renderText: (status: PullStatus, percent: number) => React.ReactNode;
   /**
    * prefix class
    */

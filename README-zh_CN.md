@@ -11,7 +11,7 @@
 ```tsx
 function renderText(pullStatus, percent) {
   switch (pullStatus) {
-    case PULL_STATUS.pulling:
+    case "pulling":
       return (
         <div>
           {`下拉即可刷新 `}
@@ -19,13 +19,13 @@ function renderText(pullStatus, percent) {
         </div>
       );
 
-    case PULL_STATUS.canRelease:
+    case "canRelease":
       return "释放即可刷新...";
 
-    case PULL_STATUS.refreshing:
+    case "refreshing":
       return "刷新中";
 
-    case PULL_STATUS.complete:
+    case "complete":
       return "刷新成功";
 
     default:
@@ -64,13 +64,12 @@ function handleRefresh() {
 ## Props
 
 ```ts
-enum PULL_STATUS {
-  normal,
-  pulling,
-  canRelease,
-  refreshing,
-  complete,
-}
+type PullStatus =
+  | "normal"
+  | "pulling"
+  | "canRelease"
+  | "refreshing"
+  | "complete";
 ```
 
 |       Name        |                           Type                            | Required |      Default       | Description                      |

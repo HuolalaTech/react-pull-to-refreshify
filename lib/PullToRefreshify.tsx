@@ -5,7 +5,7 @@ import { useUnmountedRef } from "./utils/useUnmountedRef";
 import { useUpdateEffect } from "./utils/useUpdateEffect";
 import { useDrag } from "./utils/useDrag";
 import { getScrollTop } from "./utils/getScrollTop";
-import { PULL_STATUS, PullToRefreshifyProps } from "./types";
+import type { PullStatus, PullToRefreshifyProps } from "./types";
 import { Events } from "./utils/events";
 
 export function PullToRefreshify({
@@ -25,54 +25,58 @@ export function PullToRefreshify({
 }: PullToRefreshifyProps) {
   const { ref: pullRef, scrollParent } = useScrollParent();
   const unmountedRef = useUnmountedRef();
-  const [{ offsetY, duration, pullStatus }, setState] = useState(
+  const [{ offsetY, duration, status }, setState] = useState<{
+    duration: number;
+    offsetY: number;
+    status: PullStatus;
+  }>(
     refreshing
       ? {
           duration: animationDuration,
           offsetY: headHeight,
-          pullStatus: PULL_STATUS.refreshing,
+          status: "refreshing",
         }
       : {
           offsetY: 0,
           duration: 0,
-          pullStatus: PULL_STATUS.normal,
+          status: "normal",
         }
   );
 
-  const dispatch = (status: PULL_STATUS, dragOffsetY = 0) => {
+  const dispatch = (status: PullStatus, dragOffsetY = 0) => {
     switch (status) {
-      case PULL_STATUS.pulling:
-      case PULL_STATUS.canRelease:
+      case "pulling":
+      case "canRelease":
         setState({
-          pullStatus: status,
+          status: status,
           duration: 0,
           offsetY: dragOffsetY,
         });
         break;
 
-      case PULL_STATUS.refreshing:
+      case "refreshing":
         setState({
-          pullStatus: status,
+          status: status,
           duration: animationDuration,
           offsetY: headHeight,
         });
         break;
 
-      case PULL_STATUS.complete:
+      case "complete":
         setState({
-          pullStatus: status,
+          status: status,
           duration: animationDuration,
           offsetY: headHeight,
         });
         if (unmountedRef.current) return;
         setTimeout(() => {
-          dispatch(PULL_STATUS.normal);
+          dispatch("normal");
         }, completeDelay);
         break;
 
       default:
         setState({
-          pullStatus: status,
+          status: status,
           duration: animationDuration,
           offsetY: 0,
         });
@@ -81,7 +85,7 @@ export function PullToRefreshify({
 
   // Skip the first render
   useUpdateEffect(() => {
-    dispatch(refreshing ? PULL_STATUS.refreshing : PULL_STATUS.complete);
+    dispatch(refreshing ? "refreshing" : "complete");
   }, [refreshing]);
 
   // Handle darg events
@@ -95,7 +99,7 @@ export function PullToRefreshify({
         // Not scrolled to top
         (dragOffsetY > 0 && getScrollTop(scrollParent) > 0) ||
         // Refreshing state has been triggered
-        pullStatus >= PULL_STATUS.refreshing ||
+        ["refreshing", "complete"].some((o) => o === status) ||
         disabled
       ) {
         return false;
@@ -111,9 +115,7 @@ export function PullToRefreshify({
 
       // Determine whether the condition for releasing immediate refresh is met
       const action =
-        offset - startDistance < threshold
-          ? PULL_STATUS.pulling
-          : PULL_STATUS.canRelease;
+        offset - startDistance < threshold ? "pulling" : "canRelease";
 
       dispatch(action, offset);
       return true;
@@ -125,8 +127,8 @@ export function PullToRefreshify({
       }
 
       // When the current state is the pulling state
-      if (pullStatus === PULL_STATUS.pulling) {
-        dispatch(PULL_STATUS.normal);
+      if (status === "pulling") {
+        dispatch("normal");
         return;
       }
 
@@ -182,7 +184,7 @@ export function PullToRefreshify({
             height: headHeight,
           }}
         >
-          {renderText(pullStatus, percent)}
+          {renderText(status, percent)}
         </div>
         <div className={`${prefixCls}__body`}>{children}</div>
       </div>

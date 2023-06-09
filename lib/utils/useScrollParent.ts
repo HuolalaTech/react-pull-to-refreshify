@@ -35,11 +35,12 @@ export function useScrollParent() {
   useEffect(() => {
     let touchstartY = 0;
 
-    const handleTouchstart = (event: any) => {
+    const handleTouchstart = ((event: TouchEvent) => {
       const touch = event.touches[0];
       touchstartY = touch.pageY;
-    };
-    const handleTouchmove = (event: any) => {
+    }) as EventListener;
+
+    const handleTouchmove = ((event: TouchEvent) => {
       const touch = event.touches[0];
       const currentY = touch.pageY;
       if (
@@ -50,10 +51,11 @@ export function useScrollParent() {
       ) {
         event.preventDefault();
       }
-    };
-    const handleTouchend = () => {
+    }) as EventListener;
+
+    const handleTouchend = (() => {
       touchstartY = 0;
-    };
+    }) as EventListener;
 
     Events.on(scrollParent, "touchstart", handleTouchstart);
     Events.on(scrollParent, "touchmove", handleTouchmove);

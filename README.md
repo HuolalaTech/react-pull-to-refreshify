@@ -11,7 +11,7 @@ English | [简体中文](./README-zh_CN.md)
 ```tsx
 function renderText(pullStatus, percent) {
   switch (pullStatus) {
-    case PULL_STATUS.pulling:
+    case "pulling":
       return (
         <div>
           {`Pull down `}
@@ -19,13 +19,13 @@ function renderText(pullStatus, percent) {
         </div>
       );
 
-    case PULL_STATUS.canRelease:
+    case "canRelease":
       return "Release";
 
-    case PULL_STATUS.refreshing:
+    case "refreshing":
       return "Loading...";
 
-    case PULL_STATUS.complete:
+    case "complete":
       return "Refresh succeed";
 
     default:
@@ -64,13 +64,12 @@ function handleRefresh() {
 ## Props
 
 ```ts
-enum PULL_STATUS {
-  normal,
-  pulling,
-  canRelease,
-  refreshing,
-  complete,
-}
+type PullStatus =
+  | "normal"
+  | "pulling"
+  | "canRelease"
+  | "refreshing"
+  | "complete";
 ```
 
 |       Name        |                           Type                            | Required |          Default           | Description                                                          |
