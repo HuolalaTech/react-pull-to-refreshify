@@ -72,18 +72,18 @@ type PullStatus =
   | "complete";
 ```
 
-|       Name        |                           Type                            | Required |          Default           | Description                                                          |
-| :---------------: | :-------------------------------------------------------: | :------: | :------------------------: | -------------------------------------------------------------------- |
-|    refreshing     |                          boolean                          |  false   |            true            | Whether to display the refreshing status                             |
-|     onRefresh     |                        () => void                         |   true   |                            | Function called when Refresh Event has been trigerred                |
-|    renderText     | (status: PULL_STATUS, percent: number) => React.ReactNode |   true   |                            | Function called when Refresh Event has been trigerred                |
-|   completeDelay   |                          number                           |  false   |            500             | The time for the delay to disappear after completion, the unit is ms |
-| animationDuration |                          number                           |  false   |            300             | The time for animation duration, the unit is ms                      |
-|    headHeight     |                          number                           |  false   |             50             | The height of the head prompt content area, the unit is px           |
-|     threshold     |                          number                           |  false   | Consistent with headHeight | How far to pull down to trigger refresh, unit is px                  |
-|   startDistance   |                          number                           |  false   |             30             | How far to start the pulling status, unit is px                      |
-|    resistance     |                          number                           |  false   |            0.6             | Scale of difficulty to pull down                                     |
-|     prefixCls     |                          string                           |  false   |     pull-to-refreshify     | prefix class                                                         |
-|     disabled      |                          boolean                          |  false   |           false            | Whether the PullToRefresh is disabled                                |
-|     className     |                          string                           |  false   |                            |                                                                      |
-|       style       |                       CSSProperties                       |  false   |                            |                                                                      |
+|       Name        |                           Type                           | Required |          Default           | Description                                                          |
+| :---------------: | :------------------------------------------------------: | :------: | :------------------------: | -------------------------------------------------------------------- |
+|    refreshing     |                         boolean                          |  false   |            true            | Whether to display the refreshing status                             |
+|     onRefresh     |                        () => void                        |   true   |                            | Function called when Refresh Event has been trigerred                |
+|    renderText     | (status: PullStatus, percent: number) => React.ReactNode |   true   |                            | Function called when Refresh Event has been trigerred                |
+|   completeDelay   |                          number                          |  false   |            500             | The time for the delay to disappear after completion, the unit is ms |
+| animationDuration |                          number                          |  false   |            300             | The time for animation duration, the unit is ms                      |
+|    headHeight     |                          number                          |  false   |             50             | The height of the head prompt content area, the unit is px           |
+|     threshold     |                          number                          |  false   | Consistent with headHeight | How far to pull down to trigger refresh, unit is px                  |
+|   startDistance   |                          number                          |  false   |             30             | How far to start the pulling status, unit is px                      |
+|    resistance     |                          number                          |  false   |            0.6             | Scale of difficulty to pull down                                     |
+|     prefixCls     |                          string                          |  false   |     pull-to-refreshify     | prefix class                                                         |
+|     disabled      |                         boolean                          |  false   |           false            | Whether the PullToRefresh is disabled                                |
+|     className     |                          string                          |  false   |                            |                                                                      |
+|       style       |                      CSSProperties                       |  false   |                            |                                                                      |

@@ -72,18 +72,18 @@ type PullStatus =
   | "complete";
 ```
 
-|       Name        |                           Type                            | Required |      Default       | Description                      |
-| :---------------: | :-------------------------------------------------------: | :------: | :----------------: | -------------------------------- |
-|    refreshing     |                          boolean                          |  false   |        true        | 是否显示刷新状态                 |
-|     onRefresh     |                        () => void                         |   true   |                    | 触发刷新时的处理函数             |
-|    renderText     | (status: PULL_STATUS, percent: number) => React.ReactNode |   true   |                    | 根据下拉状态，自定义下拉提示文案 |
-|   completeDelay   |                          number                           |  false   |        500         | 刷新完成提示展示时长(ms)         |
-| animationDuration |                          number                           |  false   |        300         | 动画执行时间(ms)                 |
-|    headHeight     |                          number                           |  false   |         50         | 顶部内容高度                     |
-|     threshold     |                          number                           |  false   | 与 headHeight 一致 | 触发下拉刷新的距离               |
-|   startDistance   |                          number                           |  false   |         30         | 助跑距离                         |
-|    resistance     |                          number                           |  false   |        0.6         | 拉动难度                         |
-|     prefixCls     |                          string                           |  false   | pull-to-refreshify | 前缀类名                         |
-|     disabled      |                          boolean                          |  false   |       false        | 是否禁用下拉刷新                 |
-|     className     |                          string                           |  false   |                    |                                  |
-|       style       |                       CSSProperties                       |  false   |                    |                                  |
+|       Name        |                           Type                           | Required |      Default       | Description                      |
+| :---------------: | :------------------------------------------------------: | :------: | :----------------: | -------------------------------- |
+|    refreshing     |                         boolean                          |  false   |        true        | 是否显示刷新状态                 |
+|     onRefresh     |                        () => void                        |   true   |                    | 触发刷新时的处理函数             |
+|    renderText     | (status: PullStatus, percent: number) => React.ReactNode |   true   |                    | 根据下拉状态，自定义下拉提示文案 |
+|   completeDelay   |                          number                          |  false   |        500         | 刷新完成提示展示时长(ms)         |
+| animationDuration |                          number                          |  false   |        300         | 动画执行时间(ms)                 |
+|    headHeight     |                          number                          |  false   |         50         | 顶部内容高度                     |
+|     threshold     |                          number                          |  false   | 与 headHeight 一致 | 触发下拉刷新的距离               |
+|   startDistance   |                          number                          |  false   |         30         | 助跑距离                         |
+|    resistance     |                          number                          |  false   |        0.6         | 拉动难度                         |
+|     prefixCls     |                          string                          |  false   | pull-to-refreshify | 前缀类名                         |
+|     disabled      |                         boolean                          |  false   |       false        | 是否禁用下拉刷新                 |
+|     className     |                          string                          |  false   |                    |                                  |
+|       style       |                      CSSProperties                       |  false   |                    |                                  |
