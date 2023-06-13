@@ -100,7 +100,7 @@ export function PullToRefreshify({
         // Not scrolled to top
         (dragOffsetY > 0 && getScrollTop(scrollParent) > 0) ||
         // Refreshing state has been triggered
-        ["refreshing", "complete"].some((o) => o === status) ||
+        ["refreshing", "complete"].includes(status) ||
         disabled
       ) {
         return false;
