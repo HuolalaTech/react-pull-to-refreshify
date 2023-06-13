@@ -82,6 +82,7 @@ type PullStatus =
 |    headHeight     |                          number                           |  false   |         50         | 顶部内容高度                     |
 |     threshold     |                          number                           |  false   | 与 headHeight 一致 | 触发下拉刷新的距离               |
 |   startDistance   |                          number                           |  false   |         30         | 助跑距离                         |
+|    resistance     |                          number                           |  false   |        0.6         | 拉动难度                         |
 |     prefixCls     |                          string                           |  false   | pull-to-refreshify | 前缀类名                         |
 |     disabled      |                          boolean                          |  false   |       false        | 是否禁用下拉刷新                 |
 |     className     |                          string                           |  false   |                    |                                  |

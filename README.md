@@ -82,6 +82,7 @@ type PullStatus =
 |    headHeight     |                          number                           |  false   |             50             | The height of the head prompt content area, the unit is px           |
 |     threshold     |                          number                           |  false   | Consistent with headHeight | How far to pull down to trigger refresh, unit is px                  |
 |   startDistance   |                          number                           |  false   |             30             | How far to start the pulling status, unit is px                      |
+|    resistance     |                          number                           |  false   |            0.6             | Scale of difficulty to pull down                                     |
 |     prefixCls     |                          string                           |  false   |     pull-to-refreshify     | prefix class                                                         |
 |     disabled      |                          boolean                          |  false   |           false            | Whether the PullToRefresh is disabled                                |
 |     className     |                          string                           |  false   |                            |                                                                      |

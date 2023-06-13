@@ -16,6 +16,7 @@ export function PullToRefreshify({
   refreshing = false,
   headHeight = 50,
   startDistance = 30,
+  resistance = 0.6,
   threshold = headHeight,
   onRefresh,
   disabled = false,
@@ -111,7 +112,7 @@ export function PullToRefreshify({
       }
 
       const ratio = dragOffsetY / window.screen.height;
-      const offset = dragOffsetY * (1 - ratio) * 0.6;
+      const offset = dragOffsetY * (1 - ratio) * resistance;
 
       // Determine whether the condition for releasing immediate refresh is met
       const action =

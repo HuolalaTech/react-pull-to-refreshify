@@ -37,6 +37,10 @@ export interface PullToRefreshifyProps {
    */
   threshold?: number;
   /**
+   * Scale of difficulty to pull down
+   */
+  resistance?: number;
+  /**
    * Whether the PullToRefresh is disabled
    */
   disabled?: boolean;
