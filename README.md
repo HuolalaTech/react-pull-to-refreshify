@@ -42,7 +42,7 @@ function handleRefresh() {
   }, 2000);
 }
 
-<PullRefreshify
+<PullToRefreshify
   refreshing={refreshing}
   onRefresh={handleRefresh}
   renderText={renderText}
@@ -50,7 +50,7 @@ function handleRefresh() {
   {list.map((item, i) => (
     <div key={item.id}>{item}</div>
   ))}
-</PullRefreshify>;
+</PullToRefreshify>;
 ```
 
 ## Examples
