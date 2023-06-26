@@ -1,6 +1,19 @@
-# react-pull-to-refreshify
+<div align="center">
+<h1>react-pull-to-refreshify</h1>
 
-一个简单的下拉刷新组件，具有 0 依赖性。它的 API 设计类似于 Ant Design Mobile，但可定制化程度更高，压缩后只有 2kb，适用于手机端和电脑端。
+<p>一个简单的下拉刷新组件，具有 0 依赖性。它的 API 设计类似于 Ant Design Mobile，但可定制化程度更高，压缩后只有 2kb，适用于手机端和电脑端。</p>
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/react-pull-to-refreshify"><img src="https://badgen.net/npm/v/react-pull-to-refreshify" alt="Latest published version" target="\_parent"></a>
+  <a href="https://unpkg.com/browse/react-pull-to-refreshify@latest/dist/index.umd.cjs" rel="nofollow"><img src="https://img.badgesize.io/https:/unpkg.com/react-pull-to-refreshify@latest/dist/index.umd.cjs?label=gzip%20size&compression=gzip" alt="gzip size"></a>
+  <a href="https://github.com/HuolalaTech/react-pull-to-refreshify"><img src="https://badgen.net/npm/types/react-pull-to-refreshify" alt="Types included" target="\_parent"></a>
+  <a href="https://www.npmjs.com/package/react-pull-to-refreshify"><img src="https://badgen.net/npm/license/react-pull-to-refreshify" alt="License" target="\_parent"></a>
+  <!-- <a href="https://www.npmjs.com/package/react-pull-to-refreshify"><img src="https://badgen.net/npm/dt/react-pull-to-refreshify" alt="Number of downloads" target="\_parent"></a>
+  <a href="https://github.com/HuolalaTech/react-pull-to-refreshify"><img src="https://img.shields.io/github/stars/HuolalaTech/react-pull-to-refreshify.svg?style=social&amp;label=Star" alt="GitHub Stars" target="\_parent"></a> -->
+</p>
+</div>
+
+---
 
 ![自定义百分比动画](https://files.catbox.moe/j0h1xg.gif)
 
