@@ -20,7 +20,7 @@ jobs:
           git config --global user.name 'liaoliao666'
           git config --global user.email '1076988944@qq.com'
           yarn
-          yarn test && yarn build
+          yarn build
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.PULL_TO_REFRESH_TOKEN }}

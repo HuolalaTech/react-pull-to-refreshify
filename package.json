@@ -1,7 +1,10 @@
 {
   "name": "react-pull-to-refreshify",
-  "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "description": "A simple react pull-to-refresh component with 0 dependencies. Its API design is similar to Ant Design Mobile, but it is more customizable and only 2kb after compression, suitable for both Mobile and Desktop.",
+  "author": "liaoliao666",
+  "repository": "HuolalaTech/react-pull-to-refreshify",
+  "homepage": "https://github.com/HuolalaTech/react-pull-to-refreshify",
   "type": "module",
   "types": "./dist/index.d.ts",
   "main": "./dist/index.umd.cjs",
@@ -15,7 +18,7 @@
   },
   "files": [
     "src",
-    "dist"
+    "dist/*"
   ],
   "scripts": {
     "dev": "vite",
@@ -34,7 +37,6 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "^5.0.4",
-    "vite": "^4.3.2",
-    "vite-plugin-dts": "^2.3.0"
+    "vite": "^4.3.2"
   }
 }

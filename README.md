@@ -6,6 +6,17 @@ A simple react pull-to-refresh component with 0 dependencies. Its API design is 
 
 English | [简体中文](./README-zh_CN.md)
 
+## Installation
+
+This module is distributed via [npm][npm] which is bundled with [node][node] and
+should be installed as one of your project's `dependencies`:
+
+```bash
+$ npm i react-pull-to-refreshify
+# or
+$ yarn add react-pull-to-refreshify
+```
+
 ## Usage
 
 ```tsx

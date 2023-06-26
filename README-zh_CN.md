@@ -6,6 +6,17 @@
 
 [English](./README.md) | 简体中文
 
+## 安装
+
+该模块通过 [npm][npm] 分发，与 [node][node] 捆绑在一起
+应作为项目的“依赖项”之一安装：
+
+```bash
+$ npm i react-query-kit
+# or
+$ yarn add react-query-kit
+```
+
 ## 使用
 
 ```tsx
