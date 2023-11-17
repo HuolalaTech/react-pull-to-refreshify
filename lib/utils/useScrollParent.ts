@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { getScrollTop } from "./getScrollTop";
 import { Events } from "./events";
 
-function getScrollParent(node: Element) {
+const getScrollParent = (node: Element) => {
   while (node && node.parentNode && node.parentNode !== document.body) {
     const computedStyle = window.getComputedStyle(node);
     if (
@@ -19,42 +19,39 @@ function getScrollParent(node: Element) {
   }
 
   return window;
-}
+};
 
-export function useScrollParent() {
-  const ref = useRef<any>();
-  const [scrollParent, setScrollParent] =
-    useState<ReturnType<typeof getScrollParent>>(window);
+export const useScrollParent = () => {
+  const pullRef = useRef<any>();
+  const touchstartYRef = useRef(0);
+  const scrollParentRef = useRef<ReturnType<typeof getScrollParent>>(window);
+  const unbindScrollParentEvents = useRef(() => {});
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    setScrollParent(getScrollParent(ref.current));
-  });
-
-  // Handle the scroll parent's touch events
-  useEffect(() => {
-    let touchstartY = 0;
+  const bindScrollParentEvents = (
+    scrollParent: ReturnType<typeof getScrollParent>
+  ) => {
+    touchstartYRef.current = 0;
 
     const handleTouchstart = ((event: TouchEvent) => {
       const touch = event.touches[0];
-      touchstartY = touch.pageY;
+      touchstartYRef.current = touch.pageY;
     }) as EventListener;
 
     const handleTouchmove = ((event: TouchEvent) => {
       const touch = event.touches[0];
       const currentY = touch.pageY;
       if (
-        currentY - touchstartY > 0 &&
+        currentY - touchstartYRef.current > 0 &&
         event.cancelable &&
         getScrollTop(scrollParent) === 0 &&
-        ref.current?.contains(event.target)
+        pullRef.current?.contains(event.target)
       ) {
         event.preventDefault();
       }
     }) as EventListener;
 
     const handleTouchend = (() => {
-      touchstartY = 0;
+      touchstartYRef.current = 0;
     }) as EventListener;
 
     Events.on(scrollParent, "touchstart", handleTouchstart);
@@ -68,7 +65,19 @@ export function useScrollParent() {
       Events.off(scrollParent, "touchend", handleTouchend);
       Events.off(scrollParent, "touchcancel", handleTouchend);
     };
-  }, [scrollParent]);
+  };
 
-  return { ref, scrollParent };
-}
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    const nextScrollParent = getScrollParent(pullRef.current);
+
+    if (nextScrollParent !== scrollParentRef.current) {
+      unbindScrollParentEvents.current();
+      unbindScrollParentEvents.current =
+        bindScrollParentEvents(nextScrollParent);
+      scrollParentRef.current = nextScrollParent;
+    }
+  });
+
+  return [pullRef, scrollParentRef] as const;
+};

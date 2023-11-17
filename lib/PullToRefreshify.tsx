@@ -8,7 +8,7 @@ import { getScrollTop } from "./utils/getScrollTop";
 import type { PullStatus, PullToRefreshifyProps } from "./types";
 import { Events } from "./utils/events";
 
-export function PullToRefreshify({
+export const PullToRefreshify = ({
   className,
   style,
   animationDuration = 300,
@@ -23,52 +23,30 @@ export function PullToRefreshify({
   prefixCls = "pull-to-refreshify",
   renderText,
   children,
-}: PullToRefreshifyProps) {
-  const { ref: pullRef, scrollParent } = useScrollParent();
+}: PullToRefreshifyProps) => {
+  const [pullRef, scrollParentRef] = useScrollParent();
   const unmountedRef = useUnmountedRef();
-  const [{ offsetY, duration, status }, setState] = useState<{
-    duration: number;
-    offsetY: number;
-    status: PullStatus;
-  }>(
+  const [[offsetY, duration, status], setState] = useState<
+    [number, number, PullStatus]
+  >(
     refreshing
-      ? {
-          duration: animationDuration,
-          offsetY: headHeight,
-          status: "refreshing",
-        }
-      : {
-          offsetY: 0,
-          duration: 0,
-          status: "normal",
-        }
+      ? [headHeight, animationDuration, "refreshing"]
+      : [0, 0, "normal"]
   );
 
   const dispatch = (status: PullStatus, dragOffsetY = 0) => {
     switch (status) {
       case "pulling":
       case "canRelease":
-        setState({
-          status: status,
-          duration: 0,
-          offsetY: dragOffsetY,
-        });
+        setState([dragOffsetY, 0, status]);
         break;
 
       case "refreshing":
-        setState({
-          status: status,
-          duration: animationDuration,
-          offsetY: headHeight,
-        });
+        setState([headHeight, animationDuration, status]);
         break;
 
       case "complete":
-        setState({
-          status: status,
-          duration: animationDuration,
-          offsetY: headHeight,
-        });
+        setState([headHeight, animationDuration, status]);
         if (unmountedRef.current) return;
         setTimeout(() => {
           dispatch("normal");
@@ -76,11 +54,7 @@ export function PullToRefreshify({
         break;
 
       default:
-        setState({
-          status: status,
-          duration: animationDuration,
-          offsetY: 0,
-        });
+        setState([0, animationDuration, status]);
     }
   };
 
@@ -90,7 +64,7 @@ export function PullToRefreshify({
   }, [refreshing]);
 
   // Handle darg events
-  const { ref: dragRef } = useDrag({
+  const dragRef = useDrag({
     onDragMove: (event, { offsetY: dragOffsetY }) => {
       if (
         // Not set onRefresh event
@@ -98,7 +72,7 @@ export function PullToRefreshify({
         // Pull up
         dragOffsetY <= 0 ||
         // Not scrolled to top
-        (dragOffsetY > 0 && getScrollTop(scrollParent) > 0) ||
+        (dragOffsetY > 0 && getScrollTop(scrollParentRef.current) > 0) ||
         // Refreshing state has been triggered
         ["refreshing", "complete"].includes(status) ||
         disabled
@@ -191,4 +165,4 @@ export function PullToRefreshify({
       </div>
     </div>
   );
-}
+};

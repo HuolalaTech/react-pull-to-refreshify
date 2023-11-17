@@ -22,7 +22,7 @@ function isMouseEvent(e: DragEvent): e is MouseEvent {
   return e && !("touches" in e);
 }
 
-export function useDrag({
+export const useDrag = ({
   onDragStart,
   onDragMove,
   onDragEnd,
@@ -30,7 +30,7 @@ export function useDrag({
   onDragStart?: (event: DragEvent, dragState: DragState) => void;
   onDragMove?: (event: DragEvent, dragState: DragState) => boolean;
   onDragEnd?: (event: DragEvent, dragState: DragState) => void;
-}) {
+}) => {
   const ref = useRef<any>(null);
   const onDragStartRef = useLatest(onDragStart);
   const onDragMoveRef = useLatest(onDragMove);
@@ -41,9 +41,7 @@ export function useDrag({
 
     if (!dragEl) return;
 
-    let dragState = {
-      ...initialDragState,
-    };
+    let dragState: DragState;
     let isStart = false;
 
     const initDragState = () => {
@@ -51,6 +49,8 @@ export function useDrag({
         ...initialDragState,
       };
     };
+
+    initDragState();
 
     const handleTouchstart = ((event: DragEvent) => {
       isStart = true;
@@ -123,5 +123,5 @@ export function useDrag({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return { ref };
-}
+  return ref;
+};
