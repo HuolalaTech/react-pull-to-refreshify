@@ -1,6 +1,6 @@
 {
   "name": "react-pull-to-refreshify",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "A simple react pull-to-refresh component with 0 dependencies. Its API design is similar to Ant Design Mobile, but it is more customizable and only 2kb after compression, suitable for both Mobile and Desktop.",
   "author": "liaoliao666",
   "repository": "HuolalaTech/react-pull-to-refreshify",
